@@ -231,11 +231,6 @@ tbody td:last-child  { padding-right: 14px; }
   margin-left: 4px; vertical-align: middle;
   letter-spacing: .02em;
 }
-.sname .note-badge {
-  display: block;
-  margin: 3px 0 0 0;
-  width: fit-content;
-}
 .mono { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gray-700, #374151); font-weight: 500; }
 .pnl-up   { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 700; color: var(--coral); }
 .pnl-down { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 700; color: var(--green); }
@@ -326,14 +321,11 @@ tbody td:last-child  { padding-right: 14px; }
 .sc-code { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray-500, #6B7280); margin-left: 2px; }
 .sc-rate {
   font-family: 'DM Mono', monospace;
-  font-size: 13px; font-weight: 800;
-  text-align: center; align-self: start;
-  padding: 4px 10px; border-radius: 20px;
-  display: inline-block; white-space: nowrap;
+  font-size: 15px; font-weight: 800;
+  text-align: right; align-self: start; padding-top: 2px;
 }
-.sc-rate.up   { color: var(--coral); background: var(--coral-bg); border: 1.5px solid var(--pink); }
-.sc-rate.down { color: #16a34a; background: var(--green-bg); border: 1.5px solid #86efac; }
-.sc-rate:not(.up):not(.down) { color: var(--gray-600); background: var(--gray-100); border: 1.5px solid var(--gray-200); }
+.sc-rate.up   { color: var(--coral); }
+.sc-rate.down { color: var(--green); }
 /* 欄位區：兩行 grid，三欄嚴格對齊 */
 .sc-meta {
   grid-column: 1 / -1;
@@ -703,13 +695,12 @@ tbody td:last-child  { padding-right: 14px; }
   .section-badge { font-size:13px; padding:4px 11px; }
 
   /* 股票卡片 */
-  .stock-card { padding:14px 16px 16px; gap:6px 10px; }
-  .sc-rank { font-size:11px; }
-  .sc-name { font-size:14px !important; line-height:1.3; }
-  .sc-code { font-size:11px; }
-  .sc-rate { font-size:13px !important; padding: 4px 10px; }
-  .sc-meta { row-gap: 2px; margin-top:4px; }
-  .sc-meta-label { font-size:10px; }
+  .stock-card { padding:14px 16px 16px; }
+  .sc-rank { font-size:13px; }
+  .sc-name { font-size:16px !important; }
+  .sc-code { font-size:13px; }
+  .sc-rate { font-size:18px !important; }
+  .sc-meta-label { font-size:12px; }
   .sc-meta-val { font-size:15px; }
   .sc-pnl { font-size:15px; }
 
@@ -1017,19 +1008,17 @@ tbody td:last-child  { padding-right: 14px; }
 @media(max-width:599px) {
   .cal-nav-tabs {
     position: fixed; top:0; left:0; right:0; bottom:auto;
-    flex-direction: row; padding: 0;
+    flex-direction: row; padding: 0 2px;
     border-bottom: 1px solid rgba(14,159,142,.15); border-top:none;
     box-shadow: 0 2px 10px rgba(0,0,0,.07);
     z-index: 200; height: 52px; align-items: stretch; gap:0;
-    display: grid; grid-template-columns: repeat(3, 1fr);
   }
   .cal-nav-tab {
-    flex: none; display:flex; flex-direction:column;
+    flex: 1 0 auto; display:flex; flex-direction:column;
     align-items:center; justify-content:center;
-    padding: 5px 4px 3px; font-size:12px; font-weight:600;
+    padding: 5px 6px 3px; font-size:11px; font-weight:600;
     border-bottom: 2.5px solid transparent; border-top:none;
-    line-height:1.25; gap:1px; white-space:nowrap; overflow:hidden;
-    text-overflow:ellipsis; width:100%;
+    min-width: 60px; line-height:1.2; gap:1px;
   }
   .cal-nav-tab.active { border-top:none; border-bottom-color:#0E9F8E; color:#0E9F8E; background:rgba(14,159,142,.08); font-weight:800; }
   .cal-header { position:sticky; top:52px; z-index:100; padding:10px 14px 9px; }
@@ -1085,9 +1074,9 @@ tbody td:last-child  { padding-right: 14px; }
 
 <!-- 行事曆風格 Nav -->
 <nav class="cal-nav-tabs">
-  <button class="cal-nav-tab" onclick="switchPage('plan')" id="tab-plan"><span>🌱</span><span>存股計畫</span></button>
-  <button class="cal-nav-tab active" onclick="switchPage('cheng')" id="tab-cheng"><span>📊</span><span>呈的持股</span></button>
-  <button class="cal-nav-tab" onclick="switchPage('niu')" id="tab-niu"><span>💎</span><span>妞的持股</span></button>
+  <button class="cal-nav-tab" onclick="switchPage('plan')" id="tab-plan">🌱 存股計畫</button>
+  <button class="cal-nav-tab active" onclick="switchPage('cheng')" id="tab-cheng">📊 呈的持股</button>
+  <button class="cal-nav-tab" onclick="switchPage('niu')" id="tab-niu">💎 妞的持股</button>
 </nav>
 
 <!-- ══ 呈的持股 PAGE ══ -->
@@ -1306,7 +1295,8 @@ tbody td:last-child  { padding-right: 14px; }
           <tr data-us-code="LITE"  data-us-shares="0.3342" data-us-avg="870.14"   data-us-pnl="+908"   data-us-rate="+8.82%"  data-us-price="946.9"><td><span class="sname">LITE</span></td><td class="mono">946.9</td><td class="mono">870.14</td><td class="mono">0.3342</td><td class="pnl-up">+908</td><td><span class="rate-pill up">+8.82%</span></td><td style="text-align:center"><button class="op-btn" onclick="openEditUs(this)">✏️</button> <button class="op-btn del" onclick="delUsRow(this)">🗑</button></td></tr>
           <tr data-us-code="LRCX"  data-us-shares="0.3667" data-us-avg="264.6"    data-us-pnl="+471"   data-us-rate="+15.4%"  data-us-price="305.35"><td><span class="sname">LRCX</span></td><td class="mono">305.35</td><td class="mono">264.6</td><td class="mono">0.3667</td><td class="pnl-up">+471</td><td><span class="rate-pill up">+15.4%</span></td><td style="text-align:center"><button class="op-btn" onclick="openEditUs(this)">✏️</button> <button class="op-btn del" onclick="delUsRow(this)">🗑</button></td></tr>
           <tr data-us-code="MU"    data-us-shares="0.0642" data-us-avg="755.61"   data-us-pnl="-9"     data-us-rate="-0.61%"  data-us-price="751"><td><span class="sname">MU</span></td><td class="mono">751</td><td class="mono">755.61</td><td class="mono">0.0642</td><td class="pnl-down">-9</td><td><span class="rate-pill down">-0.61%</span></td><td style="text-align:center"><button class="op-btn" onclick="openEditUs(this)">✏️</button> <button class="op-btn del" onclick="delUsRow(this)">🗑</button></td></tr>
-          <tr data-us-code="NVDA"  data-us-shares="1.1547" data-us-avg="210.05"   data-us-pnl="+189"   data-us-rate="+2.47%"  data-us-price="215.24"><td><span class="sname">NVDA</span></td><td class="mono">215.24</td><td class="mono">210.05</td><td class="mono">1.1547</td><td class="pnl-up">+189</td><td><span class="rate-pill up">+2.47%</span></td><td style="text-align:center"><button class="op-btn" onclick="openEditUs(this)">✏️</button> <button class="op-btn del" onclick="delUsRow(this)">🗑</button></td></tr>
+          <tr data-us-code="NVDA"  data-us-shares="1.3793" data-us-avg="211.03"   data-us-pnl="+189"   data-us-rate="+2.47%"  data-us-price="215.24"><td><span class="sname">NVDA</span></td><td class="mono">215.24</td><td class="mono">211.03</td><td class="mono">1.3793</td><td class="pnl-up">+189</td><td><span class="rate-pill up">+2.47%</span></td><td style="text-align:center"><button class="op-btn" onclick="openEditUs(this)">✏️</button> <button class="op-btn del" onclick="delUsRow(this)">🗑</button></td></tr>
+          <tr data-us-code="SATL"  data-us-shares="5.1199" data-us-avg="9.46"    data-us-pnl="+83"    data-us-rate="+3.31%"  data-us-price="9.77"><td><span class="sname">SATL</span></td><td class="mono">9.77</td><td class="mono">9.46</td><td class="mono">5.1199</td><td class="pnl-up">+83</td><td><span class="rate-pill up">+3.31%</span></td><td style="text-align:center"><button class="op-btn" onclick="openEditUs(this)">✏️</button> <button class="op-btn del" onclick="delUsRow(this)">🗑</button></td></tr>
           <tr data-us-code="SNDK"  data-us-shares="0.1004" data-us-avg="1447.41"  data-us-pnl="+99"    data-us-rate="+2.16%"  data-us-price="1478.68"><td><span class="sname">SNDK</span></td><td class="mono">1,478.68</td><td class="mono">1,447.41</td><td class="mono">0.1004</td><td class="pnl-up">+99</td><td><span class="rate-pill up">+2.16%</span></td><td style="text-align:center"><button class="op-btn" onclick="openEditUs(this)">✏️</button> <button class="op-btn del" onclick="delUsRow(this)">🗑</button></td></tr>
           <tr data-us-code="TSM"   data-us-shares="0.264"  data-us-avg="367.46"   data-us-pnl="+308"   data-us-rate="+10.08%" data-us-price="404.52"><td><span class="sname">TSM</span></td><td class="mono">404.52</td><td class="mono">367.46</td><td class="mono">0.264</td><td class="pnl-up">+308</td><td><span class="rate-pill up">+10.08%</span></td><td style="text-align:center"><button class="op-btn" onclick="openEditUs(this)">✏️</button> <button class="op-btn del" onclick="delUsRow(this)">🗑</button></td></tr>
         </tbody>
@@ -1379,17 +1369,7 @@ tbody td:last-child  { padding-right: 14px; }
       <span class="section-title">高股息 ETF</span>
       <span class="section-badge">5 檔</span>
     </div>
-    <!-- 排序條件列 -->
-    <div class="sort-bar" id="niu-sort-bar">
-      <span class="sort-lbl">排序</span>
-      <button class="sort-chip active" onclick="setSort('niu','rate')">🏆 報酬率</button>
-      <button class="sort-chip" onclick="setSort('niu','mkt')">💰 市占比</button>
-      <button class="sort-chip" onclick="setSort('niu','price')">📈 股價</button>
-      <button class="sort-chip" onclick="setSort('niu','pnl')">💵 損益</button>
-      <button class="sort-dir" id="niu-sort-dir" onclick="toggleDir('niu')">↓</button>
-    </div>
-    <div id="niu-card-list"></div>
-    <div class="tbl-wrap" style="display:none">
+    <div class="tbl-wrap">
       <table>
         <thead><tr><th style="text-align:left">股票名稱</th><th>現價</th><th>均價</th><th>股數</th><th>損益</th><th>報酬率</th></tr></thead>
         <tbody data-section="妞高息">
@@ -1409,8 +1389,7 @@ tbody td:last-child  { padding-right: 14px; }
       <span class="section-title">個股</span>
       <span class="section-badge">1 檔</span>
     </div>
-    <div id="niu-card-list-stock"></div>
-    <div class="tbl-wrap" style="display:none">
+    <div class="tbl-wrap">
       <table>
         <thead><tr><th style="text-align:left">股票名稱</th><th>現價</th><th>均價</th><th>股數</th><th>損益</th><th>報酬率</th></tr></thead>
         <tbody data-section="妞個股">
@@ -1426,13 +1405,12 @@ tbody td:last-child  { padding-right: 14px; }
       <span class="section-title">債券 ETF</span>
       <span class="section-badge">3 檔</span>
     </div>
-    <div id="niu-card-list-bond"></div>
-    <div class="tbl-wrap" style="display:none">
+    <div class="tbl-wrap">
       <table>
         <thead><tr><th style="text-align:left">股票名稱</th><th>現價</th><th>均價</th><th>股數</th><th>損益</th><th>報酬率</th></tr></thead>
         <tbody data-section="妞債券">
-          <tr data-code="00696B" data-avg="41.49" data-shares="3000" data-note="查價5/27"><td><div class="stock-name-wrap"><span class="sname">富邦美債20年 <span class="etf-tag">ETF</span><span class="note-badge">查價5/27</span></span><span class="scode">00696B</span></div></td><td class="live-price-cell">—</td><td class="mono">41.49</td><td class="mono">3,000</td><td class="live-pnl">—</td><td class="live-rate"><span class="rate-pill down">—</span></td></tr>
-          <tr data-code="00754B" data-avg="41.66" data-shares="1000" data-note="查價5/27"><td><div class="stock-name-wrap"><span class="sname">群益投資級金融債 <span class="etf-tag">ETF</span><span class="note-badge">查價5/27</span></span><span class="scode">00754B</span></div></td><td class="live-price-cell">—</td><td class="mono">41.66</td><td class="mono">1,000</td><td class="live-pnl">—</td><td class="live-rate"><span class="rate-pill down">—</span></td></tr>
+          <tr data-code="00696B" data-avg="41.49" data-shares="3000"><td><div class="stock-name-wrap"><span class="sname">富邦美債20年 <span class="etf-tag">ETF</span></span><span class="scode">00696B</span></div></td><td class="live-price-cell">—</td><td class="mono">41.49</td><td class="mono">3,000</td><td class="live-pnl">—</td><td class="live-rate"><span class="rate-pill down">—</span></td></tr>
+          <tr data-code="00724B" data-avg="41.66" data-shares="1000"><td><div class="stock-name-wrap"><span class="sname">群益投資級金融債 <span class="etf-tag">ETF</span></span><span class="scode">00724B</span></div></td><td class="live-price-cell">—</td><td class="mono">41.66</td><td class="mono">1,000</td><td class="live-pnl">—</td><td class="live-rate"><span class="rate-pill down">—</span></td></tr>
           <tr data-code="—" data-avg="41.84" data-shares="1000"><td><div class="stock-name-wrap"><span class="sname">台新新光庚特二</span><span class="scode">—</span></div></td><td class="live-price-cell">41.10</td><td class="mono">41.84</td><td class="mono">1,000</td><td class="pnl-down">-916</td><td><span class="rate-pill down">-2.19%</span></td></tr>
         </tbody>
       </table>
@@ -1675,16 +1653,16 @@ const TW_SUFFIX = {
   '00631L':'00631L.TW','00830':'00830.TW','00861':'00861.TW','00876':'00876.TW',
   '00878':'00878.TW','00893':'00893.TW','00910':'00910.TW','00918':'00918.TW',
   '00920':'00920.TW','00941':'00941.TW',
-  '00696B':'00696B.TWO','00754B':'00754B.TWO',
+  '00696B':'00696B.TW','00724B':'00724B.TWO',
   // 台股 ETF（上櫃 .TWO）
   '00403A':'00403A.TWO','00400A':'00400A.TWO','00999A':'00999A.TWO',
-  '00882':'00882.TWO','00991A':'00991A.TW',
+  '00882':'00882.TWO','00991A':'00991A.TWO',
   '00981B':'00981B.TWO','00981D':'00981D.TWO',
   // 個股
   '2308':'2308.TW','2313':'2313.TW','2324':'2324.TW','2449':'2449.TW',
   '2542':'2542.TW','3665':'3665.TW','6515':'6515.TW',
 };
-const FALLBACK = { '00981B': 9.17, '00981D': 10.32, '00696B': 29.93, '00754B': 32.74 };
+const FALLBACK = { '00981B': 9.17, '00981D': 10.32 };
 
 const fmt2 = n => n.toLocaleString('zh-TW',{minimumFractionDigits:2,maximumFractionDigits:2});
 const fmtI = n => Math.round(n).toLocaleString('zh-TW');
@@ -1716,20 +1694,6 @@ async function fetchPrices() {
   const codes = [...new Set([...allRows].map(r => r.dataset.code).filter(c => c && c !== '—' && TW_SUFFIX[c]))];
   allRows.forEach(tr => { if (FALLBACK[tr.dataset.code] != null) applyPrice(tr, FALLBACK[tr.dataset.code]); });
   if (!codes.length) return;
-
-  // 先用 GAS 抓主要股價，再補抓 OTC 債券 ETF
-  const otcCodes = codes.filter(c => TW_SUFFIX[c] && TW_SUFFIX[c].endsWith('.TWO'));
-
-  async function fetchOtcPrice(code) {
-    try {
-      const res = await fetch(`https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=otc_${code}.tw&json=1&delay=0`);
-      const d = await res.json();
-      const z = d?.msgArray?.[0]?.z;
-      if (z && z !== '-') return parseFloat(z);
-    } catch(e) {}
-    return null;
-  }
-
   try {
     const res = await Promise.race([
       fetch(`${GAS_URL}?codes=${codes.join(',')}`),
@@ -1738,18 +1702,6 @@ async function fetchPrices() {
     const map = await res.json();
     let n = 0;
     allRows.forEach(tr => { if (map[tr.dataset.code] != null) { applyPrice(tr, map[tr.dataset.code]); n++; } });
-
-    // 補抓 GAS 沒抓到的 OTC 債券 ETF
-    const missingOtc = otcCodes.filter(c => map[c] == null);
-    if (missingOtc.length) {
-      const otcResults = await Promise.all(missingOtc.map(async c => ({ c, p: await fetchOtcPrice(c) })));
-      otcResults.forEach(({ c, p }) => {
-        if (p) {
-          allRows.forEach(tr => { if (tr.dataset.code === c) { applyPrice(tr, p); n++; } });
-        }
-      });
-    }
-
     const now = new Date();
     document.querySelectorAll('.page-footer').forEach(el => {
       el.textContent = `✅ 已更新 ${n} 檔 · ${now.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'})} · 僅供參考`;
@@ -1816,9 +1768,6 @@ const _sortState = {
   fb: { key: 'rate', asc: false },
   yf: { key: 'rate', asc: false },
   us: { key: 'rate', asc: false },
-  niu: { key: 'rate', asc: false },
-  niustock: { key: 'rate', asc: false },
-  niubond: { key: 'rate', asc: false },
 };
 
 function setSort(prefix, key) {
@@ -1841,9 +1790,8 @@ function setSort(prefix, key) {
   // 重新渲染
   if (prefix === 'us') renderUsCards();
   else {
-    const sectionMap = { tw: '國泰', fb: '富邦', yf: '永豐', niu: '妞高息', niustock: '妞個股', niubond: '妞債券' };
-    const containerMap = { tw: 'tw-card-list', fb: 'fb-card-list', yf: 'yf-card-list', niu: 'niu-card-list', niustock: 'niu-card-list-stock', niubond: 'niu-card-list-bond' };
-    renderStockCards(sectionMap[prefix], containerMap[prefix], prefix);
+    const sectionMap = { tw: '國泰', fb: '富邦', yf: '永豐' };
+    renderStockCards(sectionMap[prefix], prefix + '-card-list', prefix);
   }
 }
 
@@ -1853,9 +1801,8 @@ function toggleDir(prefix) {
   if (dirBtn) dirBtn.textContent = _sortState[prefix].asc ? '↑' : '↓';
   if (prefix === 'us') renderUsCards();
   else {
-    const sectionMap = { tw: '國泰', fb: '富邦', yf: '永豐', niu: '妞高息', niustock: '妞個股', niubond: '妞債券' };
-    const containerMap = { tw: 'tw-card-list', fb: 'fb-card-list', yf: 'yf-card-list', niu: 'niu-card-list', niustock: 'niu-card-list-stock', niubond: 'niu-card-list-bond' };
-    renderStockCards(sectionMap[prefix], containerMap[prefix], prefix);
+    const sectionMap = { tw: '國泰', fb: '富邦', yf: '永豐' };
+    renderStockCards(sectionMap[prefix], prefix + '-card-list', prefix);
   }
 }
 
@@ -1930,10 +1877,9 @@ function renderStockCards(section, containerId, prefix) {
     return `<div class="stock-card">
       <div class="sc-top">
         <span class="sc-rank">${i+1}</span>
-        <span class="sc-name" onclick="openEditByCode('${d.code}','${section}')" title="點擊編輯">${d.name}</span>${d.isEtf ? '<span class="etf-tag">ETF</span>' : ''}
+        <span class="sc-name" onclick="openEditByCode('${d.code}','${section}')" title="點擊編輯">${d.name}</span>${d.isEtf ? '<span class="etf-tag">ETF</span>' : ''}${d.note ? `<span class="note-badge">${d.note}</span>` : ''}
         <span class="sc-code">${d.code}</span>
       </div>
-      ${d.note ? `<div style="margin:-2px 0 4px 0"><span class="note-badge">${d.note}</span></div>` : ''}
       ${sortValFn(d)}
       <div class="sc-meta">
         <div class="sc-meta-item"><span class="sc-meta-label">現價</span><span class="sc-meta-val">${d.displayPrice}</span></div>
@@ -2016,9 +1962,6 @@ function renderAllCards() {
   renderStockCards('富邦', 'fb-card-list', 'fb');
   renderStockCards('永豐', 'yf-card-list', 'yf');
   renderUsCards();
-  renderStockCards('妞高息', 'niu-card-list', 'niu');
-  renderStockCards('妞個股', 'niu-card-list-stock', 'niustock');
-  renderStockCards('妞債券', 'niu-card-list-bond', 'niubond');
 }
 
 
