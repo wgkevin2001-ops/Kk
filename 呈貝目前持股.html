@@ -1478,8 +1478,8 @@ tbody td:last-child  { padding-right: 14px; }
       <table>
         <thead><tr><th style="text-align:left">股票名稱</th><th>現價</th><th>均價</th><th>股數</th><th>損益</th><th>報酬率</th></tr></thead>
         <tbody data-section="妞債券">
-          <tr data-code="00696B" data-avg="41.49" data-shares="3000"><td><div class="stock-name-wrap"><span class="sname">富邦美債20年 <span class="etf-tag">ETF</span></span><span class="scode">00696B</span></div></td><td class="live-price-cell">—</td><td class="mono">41.49</td><td class="mono">3,000</td><td class="live-pnl">—</td><td class="live-rate"><span class="rate-pill down">—</span></td></tr>
-          <tr data-code="00724B" data-avg="41.66" data-shares="1000"><td><div class="stock-name-wrap"><span class="sname">群益投資級金融債 <span class="etf-tag">ETF</span></span><span class="scode">00724B</span></div></td><td class="live-price-cell">—</td><td class="mono">41.66</td><td class="mono">1,000</td><td class="live-pnl">—</td><td class="live-rate"><span class="rate-pill down">—</span></td></tr>
+          <tr data-code="00696B" data-avg="41.49" data-shares="3000"><td><div class="stock-name-wrap"><span class="sname">富邦美債20年 <span class="etf-tag">ETF</span></span><span class="scode">00696B</span></div></td><td class="live-price-cell">29.93</td><td class="mono">41.49</td><td class="mono">3,000</td><td class="pnl-down">-34,680</td><td class="live-rate"><span class="rate-pill down">-27.85%</span></td></tr>
+          <tr data-code="00724B" data-avg="41.66" data-shares="1000"><td><div class="stock-name-wrap"><span class="sname">群益投資級金融債 <span class="etf-tag">ETF</span></span><span class="scode">00724B</span></div></td><td class="live-price-cell">33.51</td><td class="mono">41.66</td><td class="mono">1,000</td><td class="pnl-down">-8,150</td><td class="live-rate"><span class="rate-pill down">-19.56%</span></td></tr>
           <tr data-code="—" data-avg="41.84" data-shares="1000"><td><div class="stock-name-wrap"><span class="sname">台新新光庚特二</span><span class="scode">—</span></div></td><td class="live-price-cell">41.10</td><td class="mono">41.84</td><td class="mono">1,000</td><td class="pnl-down">-916</td><td><span class="rate-pill down">-2.19%</span></td></tr>
         </tbody>
       </table>
@@ -1801,7 +1801,7 @@ const TW_SUFFIX = {
   '2308':'2308.TW','2313':'2313.TW','2324':'2324.TW','2449':'2449.TW',
   '2542':'2542.TW','3665':'3665.TW',
 };
-const FALLBACK = { '00981B': 9.17, '00981D': 10.32, '00696B': 38.50, '00724B': 32.71 };
+const FALLBACK = { '00981B': 9.17, '00981D': 10.32, '00696B': 29.93, '00724B': 33.51 }; // 00696B & 00724B 參考價 2026/05/28
 
 const fmt2 = n => n.toLocaleString('zh-TW',{minimumFractionDigits:2,maximumFractionDigits:2});
 const fmtI = n => Math.round(n).toLocaleString('zh-TW');
