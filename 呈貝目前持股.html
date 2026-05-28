@@ -1801,7 +1801,7 @@ const TW_SUFFIX = {
   '2308':'2308.TW','2313':'2313.TW','2324':'2324.TW','2449':'2449.TW',
   '2542':'2542.TW','3665':'3665.TW',
 };
-const FALLBACK = { '00981B': 9.17, '00981D': 10.32 };
+const FALLBACK = { '00981B': 9.17, '00981D': 10.32, '00696B': 38.50, '00724B': 32.71 };
 
 const fmt2 = n => n.toLocaleString('zh-TW',{minimumFractionDigits:2,maximumFractionDigits:2});
 const fmtI = n => Math.round(n).toLocaleString('zh-TW');
@@ -3084,6 +3084,7 @@ window.addEventListener('holdings-ready', function() {
   updateChengSummary();
   updateNiuSummary();
   renderAllCards();
+  if (typeof planRender === 'function') planRender();
 });
 
 /* ══ INIT ══ */
@@ -3093,6 +3094,12 @@ setInterval(fetchPrices, 60000);
 renderAllCards();
 updateUsPieChart();
 updateTwPieChart();
+// 自動從 Firebase 載入最新資料
+setTimeout(async () => {
+  if (typeof fbLoadHoldings === 'function') {
+    await fbLoadHoldings();
+  }
+}, 800);
 updateFbPieChart();
 updateYfPieChart();
 updateChengSummary();
@@ -3157,10 +3164,12 @@ function applyHoldings(data) {
   if (data.planEtfs && Array.isArray(data.planEtfs) && data.planEtfs.length > 0) {
     planEtfs = data.planEtfs.map(e => ({
       id:e.id, name:e.name, color:e.color||'#CCCCCC',
-      held:0, // held 從持股頁動態同步，不從雲端還原
+      held:0,
       target:e.target||0, divM:e.divM||[], divPu:e.divPu||0,
       divByM:e.divByM||{}, dist:e.dist||'待定', exM:e.exM||[]
     }));
+    // 還原後重新渲染計畫頁
+    if (typeof planRender === 'function') setTimeout(planRender, 300);
   }
   ['cheng','niu'].forEach(panel => {
     const pd = data[panel]; if(!pd) return;
