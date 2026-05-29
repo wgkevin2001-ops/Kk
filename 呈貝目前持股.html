@@ -3379,13 +3379,25 @@ function applyHoldings(data) {
   if (!data) return;
   // 還原存股計畫
   if (data.planEtfs && Array.isArray(data.planEtfs) && data.planEtfs.length > 0) {
-    planEtfs = data.planEtfs.map(e => ({
-      id:e.id, name:e.name, color:e.color||'#CCCCCC',
-      held:0,
-      target:e.target||0, divM:e.divM||[], divPu:e.divPu||0,
-      divByM:e.divByM||{}, dist:e.dist||'待定', exM:e.exM||[]
-    }));
-    // 還原後重新渲染計畫頁
+    // 預設正確的 exM 對照（配息月前一個月為除息月）
+    const correctExM = {
+      '00878': { divM:[3,6,9,12], exM:[2,5,8,11] },
+      '00918': { divM:[4,7,10,1], exM:[3,6,9,12] },
+      '00981B': { divM:[1,2,3,4,5,6,7,8,9,10,11,12], exM:[] },
+      '00981D': { divM:[1,2,3,4,5,6,7,8,9,10,11,12], exM:[] },
+    };
+    planEtfs = data.planEtfs.map(e => {
+      const correct = correctExM[e.id];
+      return {
+        id:e.id, name:e.name, color:e.color||'#CCCCCC',
+        held:0,
+        target:e.target||0,
+        divM: correct ? correct.divM : (e.divM||[]),
+        exM:  correct ? correct.exM  : (e.exM||[]),
+        divPu:e.divPu||0,
+        divByM:e.divByM||{}, dist:e.dist||'待定'
+      };
+    });
     if (typeof planRender === 'function') setTimeout(planRender, 300);
   }
   ['cheng','niu'].forEach(panel => {
